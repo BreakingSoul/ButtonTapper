@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CountButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/selector_count_button</item>
+    </style>
+</resources>
