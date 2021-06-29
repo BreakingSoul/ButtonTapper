@@ -29,7 +29,7 @@ class ButtonLayout @JvmOverloads constructor(
 
     init {
         val buttonScoreChangedListener = {
-            lightUpRandomButton()
+            lightUpRandomButton(false)
         }
 
         context.theme.obtainStyledAttributes(
@@ -45,6 +45,7 @@ class ButtonLayout @JvmOverloads constructor(
                 recycle()
             }
         }
+
         populateLayout()
     }
 
@@ -92,53 +93,29 @@ class ButtonLayout @JvmOverloads constructor(
 
         constraintSet.applyTo(this)
 
-        lightUpInitialRandomButton()
-
     }
 
-    private fun lightUpInitialRandomButton() {
-        val newLightenedButton = buttons.random().random()
-        newLightenedButton.lightUp()
-        lastLightnedButton = newLightenedButton
-    }
-
-
-    private fun lightUpRandomButton() {
+    fun lightUpRandomButton(initialButton: Boolean) {
         val newLightenedButton = buttons.random().random()
         if (lastLightnedButton != newLightenedButton) {
-            legitClicks++
+            if (!initialButton) {
+                legitClicks++
+            }
             newLightenedButton.lightUp()
             lastLightnedButton = newLightenedButton
         } else {
-            lightUpRandomButton()
+            lightUpRandomButton(initialButton)
         }
-    }
-
-    fun getRows(): Int {
-        return rows
-    }
-
-    fun setRows(row: Int) {
-        rows = row
-        invalidate()
-        requestLayout()
-    }
-
-    fun getColumns(): Int {
-        return columns
-    }
-
-    fun setColumns(column: Int) {
-        columns = column
-        invalidate()
-        requestLayout()
     }
 
     fun enableButtons(disable: Boolean) {
         buttons.forEach { row ->
             row.forEach { button ->
-                button.isEnabled = disable
-                button.background = ContextCompat.getDrawable(context, R.drawable.selector_count_button)
+                if (disable) {
+                    button.enable()
+                } else {
+                    button.disable()
+                }
             }
         }
     }

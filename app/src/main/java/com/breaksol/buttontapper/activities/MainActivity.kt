@@ -3,8 +3,13 @@ package com.breaksol.buttontapper.activities
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.breaksol.buttontapper.R
 import com.breaksol.buttontapper.databinding.ActivityMainBinding
+import com.breaksol.buttontapper.fragments.MainMenuFragment
 import kotlin.math.roundToInt
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,29 +21,27 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.buttonLayout.legitClicksTextView = binding.legitClicks
+        val fragmentManager = this.supportFragmentManager
+        val fragment = MainMenuFragment.newInstance("a","b")
+        val fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.flHolder, fragment)
+        fragmentTransaction.commit()
+    }
 
-        var secondsLeft = 0
-
-        object : CountDownTimer(10500, 100) {
-            override fun onTick(ms: Long) {
-                if ((ms.toFloat() / 1000.0f).roundToInt() != secondsLeft) {
-                    secondsLeft = (ms.toFloat() / 1000.0f).roundToInt()
-                    if (secondsLeft >= 10) {
-                        binding.timer.text = "0:$secondsLeft"
-                    } else {
-                        binding.timer.text = "0:0$secondsLeft"
-                    }
-                }
-  //              Log.i("test", "ms=$ms till finished=$secondsLeft")
-            }
-
-            override fun onFinish() {
-                binding.timer.text = "0:00"
-                binding.buttonLayout.enableButtons(false)
-            }
-        }.start()
-
+    fun replaceFragments(fragmentClass: Class<*>) {
+        var fragment: Fragment? = null
+        try {
+            fragment = fragmentClass.newInstance() as Fragment
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        // Insert the fragment by replacing any existing fragment
+        val fragmentManager: FragmentManager = supportFragmentManager
+        if (fragment != null) {
+            fragmentManager.beginTransaction()
+                .disallowAddToBackStack()
+                .replace(R.id.flHolder, fragment)
+                .commit()
+        }
     }
 
 }
