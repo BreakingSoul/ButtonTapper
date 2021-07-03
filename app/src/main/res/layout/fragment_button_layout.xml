@@ -16,6 +16,8 @@
         android:text=""
         android:textSize="20sp"
         android:countDown="true"
+        android:textColor="@color/white"
+        android:background="@drawable/glowing_border"
         app:layout_constraintWidth_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,6 +29,8 @@
         android:gravity="center"
         android:text="Buttons: 0"
         android:textSize="20sp"
+        android:textColor="@color/white"
+        android:background="@drawable/glowing_border"
         app:layout_constraintStart_toEndOf="@id/timer"
         app:layout_constraintTop_toTopOf="@id/timer"
         app:layout_constraintBottom_toBottomOf="@id/timer"
