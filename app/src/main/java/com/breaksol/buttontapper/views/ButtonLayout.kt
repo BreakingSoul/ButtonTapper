@@ -5,9 +5,10 @@ import android.util.AttributeSet
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat
+import com.breaksol.buttontapper.PreferencesUtils
 import com.breaksol.buttontapper.R
 import kotlin.properties.Delegates
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 
 
 class ButtonLayout @JvmOverloads constructor(
@@ -17,7 +18,7 @@ class ButtonLayout @JvmOverloads constructor(
     private var rows = 0
     private var columns = 0
     private lateinit var idMatrixButtons: Array<MutableList<Int>>
-    private var buttons: Array<Array<CountButton>>
+    private lateinit var buttons: Array<Array<CountButton>>
     private val constraintSet = ConstraintSet()
     private var lastLightnedButton: CountButton? = null
 
@@ -38,15 +39,30 @@ class ButtonLayout @JvmOverloads constructor(
                 0, 0
         ).apply {
             try {
-                rows = getInteger(R.styleable.ButtonLayout_rows, 3)
-                columns = getInteger(R.styleable.ButtonLayout_columns, 4)
-                buttons = Array(rows) { Array(columns) { CountButton(context, buttonScoreChangedListener) } }
+//                rows = getInteger(R.styleable.ButtonLayout_rows, 3)
+//                columns = getInteger(R.styleable.ButtonLayout_columns, 4)
+                rows = PreferencesUtils.getRows(context)
+                columns = PreferencesUtils.getColumns(context)
+
+                viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+                    override fun onGlobalLayout() {
+                        viewTreeObserver.removeOnGlobalLayoutListener(this)
+
+                        val horizontalSpaceForButtons = width - 250
+                        val verticalSpaceForButtons = height - 250
+                        val horizontalDiameter = horizontalSpaceForButtons/columns
+                        val verticalDiameter = verticalSpaceForButtons/rows
+                        val buttonDiameter = minOf(horizontalDiameter, verticalDiameter)
+                        buttons = Array(rows) { Array(columns) { CountButton(context, buttonScoreChangedListener, buttonDiameter) } }
+                        populateLayout()
+                    }
+                })
+
             } finally {
                 recycle()
             }
         }
 
-        populateLayout()
     }
 
     private fun populateLayout() {

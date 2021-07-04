@@ -13,10 +13,12 @@ class CountButton @JvmOverloads constructor(
 ) : FButton(context, attrs, defStyleAttr) {
 
     constructor(
-            context: Context, listener: () -> Unit, attrs: AttributeSet? = null,
+            context: Context, listener: () -> Unit, diameter: Int, attrs: AttributeSet? = null,
             defStyleAttr: Int = 0
     ) : this(context, attrs, defStyleAttr) {
         scoreChangedListener = listener
+        width = diameter
+        height = diameter
     }
 
     private var remainingClicks: Int by Delegates.observable(-1) { _, oldValue, newValue ->
@@ -38,8 +40,8 @@ class CountButton @JvmOverloads constructor(
         setOnClickListener(listener)
 
         changeColor(-1)
-        width = 150
-        height = 150
+//        width = 150
+//        height = 150
 
         isShadowEnabled = true
         shadowHeight = 10
