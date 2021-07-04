@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import com.breaksol.buttontapper.R
 import com.breaksol.buttontapper.activities.MainActivity
 import com.breaksol.buttontapper.databinding.FragmentButtonLayoutBinding
 import kotlin.math.roundToInt
@@ -28,6 +30,25 @@ class ButtonLayoutFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private val time = 11000
+
+    var secondsLeft = 0
+    private val timer = object : CountDownTimer(3500, 100) {
+        override fun onTick(ms: Long) {
+            if ((ms.toFloat() / 1000.0f).roundToInt() != secondsLeft) {
+                secondsLeft = (ms.toFloat() / 1000.0f).roundToInt()
+                if (secondsLeft > 0) {
+                    binding.tvCountdownTimer.text = "$secondsLeft"
+                } else {
+                    binding.llCountdownLayout.visibility = View.GONE
+                    binding.clMainFragmentLayout.isClickable = true
+                    startGame()
+                }
+            }
+        }
+
+        override fun onFinish() {}
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +73,16 @@ class ButtonLayoutFragment : Fragment() {
             if (SystemClock.elapsedRealtime() - it.base >= -1000)  {
                 binding.buttonLayout.enableButtons(false)
                 it.stop()
+                binding.homeButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_home_gold_24)
+                binding.restartButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_replay_gold_24)
             }
+        }
+
+        binding.homeButton.setOnClickListener {
+            binding.timer.stop()
+            timer.cancel()
+            val activity: MainActivity = activity as MainActivity
+            activity.replaceFragments(MainMenuFragment::class.java)
         }
 
         binding.restartButton.setOnClickListener {
@@ -66,25 +96,7 @@ class ButtonLayoutFragment : Fragment() {
     }
 
     private fun setCountDownLayout() {
-
-        var secondsLeft = 0
-        object : CountDownTimer(3500, 100) {
-            override fun onTick(ms: Long) {
-                if ((ms.toFloat() / 1000.0f).roundToInt() != secondsLeft) {
-                    secondsLeft = (ms.toFloat() / 1000.0f).roundToInt()
-                    if (secondsLeft > 0) {
-                        binding.tvCountdownTimer.text = "$secondsLeft"
-                    } else {
-                        binding.clCountdownLayout.visibility = View.GONE
-                        binding.clMainFragmentLayout.isClickable = true
-                        startGame()
-                    }
-                }
-            }
-
-            override fun onFinish() {}
-
-        }.start()
+        timer.start()
     }
 
     private fun startGame() {
@@ -92,7 +104,8 @@ class ButtonLayoutFragment : Fragment() {
         binding.buttonLayout.lightUpRandomButton(true)
         binding.timer.base = SystemClock.elapsedRealtime() + time
         binding.timer.start()
-        binding.restartButton.visibility = View.VISIBLE
+        binding.restartButton.isEnabled = true
+        binding.homeButton.isEnabled = true
     }
 
     override fun onDestroyView() {

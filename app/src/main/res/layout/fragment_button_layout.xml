@@ -8,72 +8,121 @@
     android:clickable="false"
     tools:context=".fragments.ButtonLayoutFragment">
 
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:enabled="false"
+        android:stateListAnimator="@null"
+        android:background="@drawable/ic_home_grey_24"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@id/timer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Chronometer
         android:id="@+id/timer"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text=""
-        android:textSize="20sp"
+        android:layout_height="40dp"
         android:countDown="true"
-        android:textColor="@color/white"
-        android:background="@drawable/glowing_border"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:textColor="@color/magenta_shadow"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/homeButton"
+        app:layout_constraintEnd_toStartOf="@id/llImages"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llImages"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/timer">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_clock_magenta_24" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="5dp"
+            android:background="@color/magenta_shadow"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_tap_button_magenta_24"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/legitClicks"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="Buttons: 0"
+        android:text="0"
+        android:textColor="@color/magenta_shadow"
         android:textSize="20sp"
-        android:textColor="@color/white"
-        android:background="@drawable/glowing_border"
-        app:layout_constraintStart_toEndOf="@id/timer"
-        app:layout_constraintTop_toTopOf="@id/timer"
         app:layout_constraintBottom_toBottomOf="@id/timer"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/restartButton"
+        app:layout_constraintStart_toEndOf="@id/llImages"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/restartButton"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="10dp"
-        android:text="R"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/legitClicks"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:enabled="false"
+        android:background="@drawable/ic_replay_grey_24"
+        android:stateListAnimator="@null"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/timer"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/magenta_shadow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timer"/>
 
     <com.breaksol.buttontapper.views.ButtonLayout
         android:id="@+id/buttonLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:columns="3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timer"
-        app:rows="5"
-        app:columns="3"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:rows="5" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:id="@+id/llCountdownLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/clCountdownLayout"
+        android:gravity="center"
         android:background="@color/transparent_grey">
 
         <TextView
             android:id="@+id/tvCountdownTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="100sp"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:textSize="100sp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
