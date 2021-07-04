@@ -44,6 +44,10 @@ class MainMenuFragment : Fragment() {
             val activity: MainActivity = activity as MainActivity
             activity.replaceFragments(ButtonLayoutFragment::class.java)
         }
+        binding.bSettings.setOnClickListener {
+            val activity: MainActivity = activity as MainActivity
+            activity.replaceFragments(SettingsFragment::class.java)
+        }
         return view
     }
 
