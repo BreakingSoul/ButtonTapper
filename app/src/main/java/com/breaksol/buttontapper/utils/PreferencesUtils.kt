@@ -1,4 +1,4 @@
-package com.breaksol.buttontapper
+package com.breaksol.buttontapper.utils
 
 import android.content.Context
 import android.content.SharedPreferences

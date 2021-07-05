@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import com.breaksol.buttontapper.PreferencesUtils
+import com.breaksol.buttontapper.utils.PreferencesUtils
 import com.breaksol.buttontapper.R
 import com.breaksol.buttontapper.activities.MainActivity
 import com.breaksol.buttontapper.databinding.FragmentButtonLayoutBinding

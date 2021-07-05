@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import com.breaksol.buttontapper.PreferencesUtils
-import com.breaksol.buttontapper.R
+import com.breaksol.buttontapper.utils.PreferencesUtils
 import com.breaksol.buttontapper.activities.MainActivity
-import com.breaksol.buttontapper.databinding.FragmentButtonLayoutBinding
 import com.breaksol.buttontapper.databinding.FragmentSettingsBinding
 import kotlin.properties.Delegates
 

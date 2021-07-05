@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import com.breaksol.buttontapper.PreferencesUtils
+import com.breaksol.buttontapper.utils.PreferencesUtils
 import com.breaksol.buttontapper.R
 import kotlin.properties.Delegates
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
