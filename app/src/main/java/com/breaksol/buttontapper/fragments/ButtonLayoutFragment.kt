@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.breaksol.buttontapper.PreferencesUtils
 import com.breaksol.buttontapper.R
 import com.breaksol.buttontapper.activities.MainActivity
 import com.breaksol.buttontapper.databinding.FragmentButtonLayoutBinding
 import kotlin.math.roundToInt
+import kotlin.properties.Delegates
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +31,8 @@ class ButtonLayoutFragment : Fragment() {
     private val binding get() = _binding!!
     private var param1: String? = null
     private var param2: String? = null
-    private val time = 11000
+    // 10 secs = 11000.
+    private var time by Delegates.notNull<Int>()
 
     var secondsLeft = 0
     private val timer = object : CountDownTimer(3500, 100) {
@@ -67,6 +70,8 @@ class ButtonLayoutFragment : Fragment() {
         val view = binding.root
 
         binding.buttonLayout.legitClicksTextView = binding.legitClicks
+
+        time = (PreferencesUtils.getTime(requireContext()) * 1000) + 1000
 
         binding.timer.base = SystemClock.elapsedRealtime() + time - 1
         binding.timer.setOnChronometerTickListener {

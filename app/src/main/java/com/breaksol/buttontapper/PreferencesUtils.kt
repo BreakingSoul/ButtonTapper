@@ -30,6 +30,19 @@ class PreferencesUtils {
             val sharedPref: SharedPreferences = ctx.getSharedPreferences("settings", 0)
             return sharedPref.getInt("columns", 3)
         }
+
+        fun saveTime(ctx: Context, time: Int) {
+            val sharedPref: SharedPreferences = ctx.getSharedPreferences("settings", 0)
+            val editor = sharedPref.edit()
+            editor.putInt("time", time)
+            editor.apply()
+        }
+
+        fun getTime(ctx: Context): Int {
+            val sharedPref: SharedPreferences = ctx.getSharedPreferences("settings", 0)
+            return sharedPref.getInt("time", 15)
+        }
+
     }
 
 }

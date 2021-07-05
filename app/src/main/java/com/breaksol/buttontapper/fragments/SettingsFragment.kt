@@ -44,10 +44,12 @@ class SettingsFragment : Fragment() {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.tvRowAmount.text = "Rows: ${PreferencesUtils.getRows(requireContext()).toString()}"
-        binding.tvColumnAmount.text = "Columns: ${PreferencesUtils.getColumns(requireContext()).toString()}"
+        binding.tvRowAmount.text = "Rows: ${PreferencesUtils.getRows(requireContext())}"
+        binding.tvColumnAmount.text = "Columns: ${PreferencesUtils.getColumns(requireContext())}"
+        binding.tvTime.text = "Time: ${PreferencesUtils.getTime(requireContext())} seconds"
         binding.sbRows.progress = PreferencesUtils.getRows(requireContext()) - 2
         binding.sbColumns.progress = PreferencesUtils.getColumns(requireContext()) - 2
+        binding.sbTime.progress = PreferencesUtils.getTime(requireContext()) / 5 - 1
 
         binding.homeButton.setOnClickListener {
             val activity: MainActivity = activity as MainActivity
@@ -60,8 +62,8 @@ class SettingsFragment : Fragment() {
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 // Display the current progress of SeekBar
-                currentValue = i
-                binding.tvRowAmount.text = "Rows: ${i + 2}"
+                currentValue = i + 2
+                binding.tvRowAmount.text = "Rows: $currentValue"
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -71,7 +73,7 @@ class SettingsFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 // Do something
-                PreferencesUtils.saveRows(requireContext(), currentValue + 2)
+                PreferencesUtils.saveRows(requireContext(), currentValue)
             }
         })
 
@@ -81,8 +83,8 @@ class SettingsFragment : Fragment() {
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 // Display the current progress of SeekBar
-                currentValue = i
-                binding.tvColumnAmount.text = "Columns: ${i + 2}"
+                currentValue = i + 2
+                binding.tvColumnAmount.text = "Columns: $currentValue"
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -92,7 +94,28 @@ class SettingsFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 // Do something
-                PreferencesUtils.saveColumns(requireContext(), currentValue + 2)
+                PreferencesUtils.saveColumns(requireContext(), currentValue)
+            }
+        })
+
+        binding.sbTime.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+
+            var currentValue by Delegates.notNull<Int>()
+
+            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
+                // Display the current progress of SeekBar
+                currentValue = (i + 1) * 5
+                binding.tvTime.text = "Time: $currentValue seconds"
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                // Do something
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                // Do something
+                PreferencesUtils.saveTime(requireContext(), currentValue)
             }
         })
 
