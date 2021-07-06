@@ -24,7 +24,7 @@ class ButtonLayout @JvmOverloads constructor(
 
     lateinit var legitClicksTextView: TextView
 
-    private var legitClicks: Int by Delegates.observable(0) { _, _, newValue ->
+    var legitClicks: Int by Delegates.observable(0) { _, _, newValue ->
         legitClicksTextView.text = "$newValue"
     }
 

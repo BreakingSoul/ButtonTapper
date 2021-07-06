@@ -8,10 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+import com.breaksol.buttontapper.database.AppDatabase
 import com.breaksol.buttontapper.utils.PreferencesUtils
 import com.breaksol.buttontapper.R
+import com.breaksol.buttontapper.database.Record
 import com.breaksol.buttontapper.activities.MainActivity
 import com.breaksol.buttontapper.databinding.FragmentButtonLayoutBinding
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import kotlin.properties.Delegates
 
@@ -76,10 +81,8 @@ class ButtonLayoutFragment : Fragment() {
         binding.timer.base = SystemClock.elapsedRealtime() + time - 1
         binding.timer.setOnChronometerTickListener {
             if (SystemClock.elapsedRealtime() - it.base >= -1000)  {
-                binding.buttonLayout.enableButtons(false)
                 it.stop()
-                binding.homeButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_home_gold_24)
-                binding.restartButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_replay_gold_24)
+                finishGame()
             }
         }
 
@@ -111,6 +114,28 @@ class ButtonLayoutFragment : Fragment() {
         binding.timer.start()
         binding.restartButton.isEnabled = true
         binding.homeButton.isEnabled = true
+    }
+
+
+    private fun finishGame() {
+        binding.buttonLayout.enableButtons(false)
+        binding.homeButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_home_gold_24)
+        binding.restartButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_replay_gold_24)
+
+        val db = Room.databaseBuilder(
+            requireActivity().applicationContext,
+            AppDatabase::class.java, "recordsDB"
+        ).build()
+
+        val recordDao = db.recordDao()
+
+        val record = Record(binding.buttonLayout.legitClicks, PreferencesUtils.getRows(requireContext()),
+            PreferencesUtils.getColumns(requireContext()), PreferencesUtils.getTime(requireContext()))
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            recordDao.insertRecord(record)
+        }
+
     }
 
     override fun onDestroyView() {
