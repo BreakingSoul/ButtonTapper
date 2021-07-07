@@ -56,7 +56,7 @@ class SettingsFragment : Fragment() {
 
         binding.sbRows.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
-            var currentValue by Delegates.notNull<Int>()
+            var currentValue = -1
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 // Display the current progress of SeekBar
@@ -71,13 +71,15 @@ class SettingsFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 // Do something
-                PreferencesUtils.saveRows(requireContext(), currentValue)
+                if (currentValue != -1) {
+                    PreferencesUtils.saveRows(requireContext(), currentValue)
+                }
             }
         })
 
         binding.sbColumns.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
-            var currentValue by Delegates.notNull<Int>()
+            var currentValue = -1
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 // Display the current progress of SeekBar
@@ -92,13 +94,15 @@ class SettingsFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 // Do something
-                PreferencesUtils.saveColumns(requireContext(), currentValue)
+                if (currentValue != -1) {
+                    PreferencesUtils.saveColumns(requireContext(), currentValue)
+                }
             }
         })
 
         binding.sbTime.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
-            var currentValue by Delegates.notNull<Int>()
+            var currentValue = -1
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 // Display the current progress of SeekBar
@@ -113,7 +117,9 @@ class SettingsFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 // Do something
-                PreferencesUtils.saveTime(requireContext(), currentValue)
+                if (currentValue != -1) {
+                    PreferencesUtils.saveTime(requireContext(), currentValue)
+                }
             }
         })
 
