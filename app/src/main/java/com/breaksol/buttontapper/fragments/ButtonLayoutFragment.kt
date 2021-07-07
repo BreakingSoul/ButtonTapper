@@ -4,19 +4,18 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.SystemClock
 import android.text.Html
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
-import com.breaksol.buttontapper.database.AppDatabase
-import com.breaksol.buttontapper.utils.PreferencesUtils
-import com.breaksol.buttontapper.R
-import com.breaksol.buttontapper.database.Record
 import com.breaksol.buttontapper.activities.MainActivity
+import com.breaksol.buttontapper.database.AppDatabase
+import com.breaksol.buttontapper.database.Record
 import com.breaksol.buttontapper.databinding.FragmentButtonLayoutBinding
+import com.breaksol.buttontapper.utils.PreferencesUtils
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import kotlin.properties.Delegates
@@ -56,7 +55,6 @@ class ButtonLayoutFragment : Fragment() {
         }
 
         override fun onFinish() {}
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,13 +90,19 @@ class ButtonLayoutFragment : Fragment() {
         binding.homeButton.setOnClickListener {
             binding.timer.stop()
             timer.cancel()
-            val activity: MainActivity = activity as MainActivity
-            activity.replaceFragments(MainMenuFragment::class.java)
+            openMenu()
         }
 
         binding.restartButton.setOnClickListener {
-            val activity: MainActivity = activity as MainActivity
-            activity.replaceFragments(ButtonLayoutFragment::class.java)
+            restartGame()
+        }
+
+        binding.endingHomeButton.setOnClickListener {
+            openMenu()
+        }
+
+        binding.endingRestartButton.setOnClickListener {
+            restartGame()
         }
 
         setCountDownLayout()
@@ -119,21 +123,35 @@ class ButtonLayoutFragment : Fragment() {
         binding.homeButton.isEnabled = true
     }
 
-
     private fun finishGame() {
         binding.buttonLayout.enableButtons(false)
-        binding.homeButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_home_gold_24)
-        binding.restartButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_replay_gold_24)
+        binding.homeButton.isEnabled = false
+        binding.restartButton.isEnabled = false
+        checkAndInsertRecord()
+        showEndingScreen()
+    }
 
+    private fun showEndingScreen() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            delay(1500)
+            binding.endingHomeButton.visibility = View.VISIBLE
+            binding.endingRestartButton.visibility = View.VISIBLE
+            binding.tvTask.text = "Result"
+            binding.tvCountdownTimer.text = binding.legitClicks.text
+            binding.clCountdownLayout.visibility = View.VISIBLE
+        }
+    }
+
+    private fun checkAndInsertRecord() {
         val db = Room.databaseBuilder(
-            requireActivity().applicationContext,
-            AppDatabase::class.java, "recordsDB"
+                requireActivity().applicationContext,
+                AppDatabase::class.java, "recordsDB"
         ).build()
 
         val recordDao = db.recordDao()
 
         val record = Record(binding.buttonLayout.legitClicks, PreferencesUtils.getRows(requireContext()),
-            PreferencesUtils.getColumns(requireContext()), PreferencesUtils.getTime(requireContext()))
+                PreferencesUtils.getColumns(requireContext()), PreferencesUtils.getTime(requireContext()))
 
         viewLifecycleOwner.lifecycleScope.launch {
             if (recordDao.getAll().size < 10) {
@@ -147,7 +165,16 @@ class ButtonLayoutFragment : Fragment() {
             }
 
         }
+    }
 
+    private fun openMenu() {
+        val activity: MainActivity = activity as MainActivity
+        activity.replaceFragments(MainMenuFragment::class.java)
+    }
+
+    private fun restartGame() {
+        val activity: MainActivity = activity as MainActivity
+        activity.replaceFragments(ButtonLayoutFragment::class.java)
     }
 
     override fun onDestroyView() {

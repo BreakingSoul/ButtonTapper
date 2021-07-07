@@ -141,6 +141,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <Button
+            android:id="@+id/endingHomeButton"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/selector_ending_home_button"
+            app:backgroundTint="@null"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/endingRestartButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCountdownTimer" />
+
+        <Button
+            android:id="@+id/endingRestartButton"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/selector_ending_restart_button"
+            app:backgroundTint="@null"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/endingHomeButton"
+            app:layout_constraintTop_toBottomOf="@id/tvCountdownTimer" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
