@@ -133,7 +133,16 @@ class ButtonLayoutFragment : Fragment() {
             PreferencesUtils.getColumns(requireContext()), PreferencesUtils.getTime(requireContext()))
 
         viewLifecycleOwner.lifecycleScope.launch {
-            recordDao.insertRecord(record)
+            if (recordDao.getAll().size < 10) {
+                recordDao.insertRecord(record)
+            } else {
+                val worstResult = recordDao.getWorseRecord(record.result)
+                if (worstResult.isNotEmpty()) {
+                    recordDao.delete(worstResult[0])
+                    recordDao.insertRecord(record)
+                }
+            }
+
         }
 
     }

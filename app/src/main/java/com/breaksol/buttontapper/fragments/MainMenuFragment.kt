@@ -1,13 +1,11 @@
 package com.breaksol.buttontapper.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.breaksol.buttontapper.R
+import androidx.fragment.app.Fragment
 import com.breaksol.buttontapper.activities.MainActivity
-import com.breaksol.buttontapper.databinding.FragmentButtonLayoutBinding
 import com.breaksol.buttontapper.databinding.FragmentMainMenuBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,6 +45,10 @@ class MainMenuFragment : Fragment() {
         binding.bSettings.setOnClickListener {
             val activity: MainActivity = activity as MainActivity
             activity.replaceFragments(SettingsFragment::class.java)
+        }
+        binding.bRecords.setOnClickListener {
+            val activity: MainActivity = activity as MainActivity
+            activity.replaceFragments(RecordsFragment::class.java)
         }
         return view
     }
