@@ -11,7 +11,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
-        android:background="@drawable/ic_home_grey_24"
+        android:background="@drawable/selector_home_corner_button"
         android:stateListAnimator="@null"
         app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:text="Rows"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="45sp"
         app:layout_constraintBottom_toTopOf="@id/sbRows"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:text="Time"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="45sp"
         app:layout_constraintBottom_toTopOf="@id/sbTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:text="Columns"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="45sp"
         app:layout_constraintBottom_toTopOf="@id/sbColumns"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

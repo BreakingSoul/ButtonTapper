@@ -16,4 +16,6 @@
     <color name="grey_shadow">#505050</color>
     <color name="transparent_grey">#800C0C0C</color>
     <color name="bronze">#FF5722</color>
+    <color name="silver">#CDCDCD</color>
+    <color name="dark_silver">#A1A1A1</color>
 </resources>

@@ -15,7 +15,7 @@
         android:layout_marginStart="10dp"
         android:enabled="false"
         android:stateListAnimator="@null"
-        android:background="@drawable/ic_home_grey_24"
+        android:background="@drawable/selector_home_corner_button"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@id/timer"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,9 +28,9 @@
         android:countDown="true"
         android:gravity="center"
         android:textColor="@color/magenta_shadow"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/homeButton"
+        android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@id/llImages"
+        app:layout_constraintStart_toEndOf="@id/homeButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
@@ -70,7 +70,7 @@
         android:gravity="center"
         android:text="0"
         android:textColor="@color/magenta_shadow"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@id/timer"
         app:layout_constraintEnd_toStartOf="@id/restartButton"
         app:layout_constraintStart_toEndOf="@id/llImages"
@@ -82,7 +82,7 @@
         android:layout_height="30dp"
         android:layout_marginEnd="10dp"
         android:enabled="false"
-        android:background="@drawable/ic_replay_grey_24"
+        android:background="@drawable/selector_replay_button"
         android:stateListAnimator="@null"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,20 +109,38 @@
         app:layout_constraintTop_toBottomOf="@id/divider"
         app:rows="5" />
 
-    <LinearLayout
-        android:id="@+id/llCountdownLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCountdownLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:background="@color/transparent_grey">
 
         <TextView
+            android:id="@+id/tvTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="45sp"
+            android:text="Tap golden buttons!"
+            android:fontFamily="@font/adrip1"
+            app:layout_constraintBottom_toTopOf="@id/tvCountdownTimer"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
             android:id="@+id/tvCountdownTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="100sp" />
+            android:textSize="100sp"
+            android:fontFamily="@font/adrip1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

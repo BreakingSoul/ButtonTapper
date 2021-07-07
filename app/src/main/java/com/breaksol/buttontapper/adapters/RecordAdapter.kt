@@ -43,7 +43,7 @@ class RecordAdapter(private val dataSet: List<Record>, private val context: Cont
 
         when(position) {
             0 -> viewHolder.colorBestPosition(ContextCompat.getColor(context, R.color.gold))
-            1 -> viewHolder.colorBestPosition(ContextCompat.getColor(context, R.color.grey))
+            1 -> viewHolder.colorBestPosition(ContextCompat.getColor(context, R.color.dark_silver))
             2 -> viewHolder.colorBestPosition(ContextCompat.getColor(context, R.color.bronze))
         }
     }

@@ -10,10 +10,9 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/glowing_border"
         android:text="@string/app_name"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="60sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,11 +41,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bPlay" />
-    <!--        app:buttonColor="@color/magenta"-->
-    <!--        app:shadowColor="@color/magenta_shadow"-->
-    <!--        app:shadowEnabled="true"-->
-    <!--        app:cornerRadius="5dp"-->
-    <!--        app:shadowHeight="10dp"-->
+
     <Button
         android:id="@+id/bSettings"
         android:layout_width="90dp"
@@ -58,41 +53,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/bRecords"
         app:layout_constraintTop_toBottomOf="@id/bPlay" />
-
-    <!--    <SeekBar-->
-    <!--        android:id="@+id/sbRows"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        style="@style/Widget.AppCompat.SeekBar.Discrete"-->
-    <!--        android:layout_width="130dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:max="6"-->
-    <!--        android:progress="4"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/bRecords" />-->
-
-    <!--    <SeekBar-->
-    <!--        android:id="@+id/sbColumns"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        style="@style/Widget.AppCompat.SeekBar.Discrete"-->
-    <!--        android:layout_width="130dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:max="3"-->
-    <!--        android:progress="2"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/sbRows" />-->
-
-    <!--    <SeekBar-->
-    <!--        android:id="@+id/sbTime"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:layout_width="130dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:max="10"-->
-    <!--        android:progress="3"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/sbColumns" />-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

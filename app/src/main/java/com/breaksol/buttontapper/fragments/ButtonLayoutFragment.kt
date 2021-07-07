@@ -3,6 +3,7 @@ package com.breaksol.buttontapper.fragments
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.SystemClock
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -47,7 +48,7 @@ class ButtonLayoutFragment : Fragment() {
                 if (secondsLeft > 0) {
                     binding.tvCountdownTimer.text = "$secondsLeft"
                 } else {
-                    binding.llCountdownLayout.visibility = View.GONE
+                    binding.clCountdownLayout.visibility = View.GONE
                     binding.clMainFragmentLayout.isClickable = true
                     startGame()
                 }
@@ -74,6 +75,8 @@ class ButtonLayoutFragment : Fragment() {
         _binding = FragmentButtonLayoutBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val task = "Tap <u><font color='#FFEB3B'>golden</font></u> buttons!"
+        binding.tvTask.text = Html.fromHtml(task)
         binding.buttonLayout.legitClicksTextView = binding.legitClicks
 
         time = (PreferencesUtils.getTime(requireContext()) * 1000) + 1000
