@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         val fragmentManager = this.supportFragmentManager
-        val fragment = MainMenuFragment.newInstance("a","b")
+        val fragment = MainMenuFragment.newInstance()
         val fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.flHolder, fragment)
         fragmentTransaction.commit()
     }
