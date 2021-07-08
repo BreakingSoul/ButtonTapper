@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Chronometer
+    <com.breaksol.buttontapper.views.PausableChronometer
         android:id="@+id/timer"
         android:layout_width="0dp"
         android:layout_height="40dp"
@@ -29,6 +29,7 @@
         android:gravity="center"
         android:textColor="@color/magenta_shadow"
         android:textSize="30sp"
+        android:paddingTop="4dp"
         app:layout_constraintEnd_toStartOf="@id/llImages"
         app:layout_constraintStart_toEndOf="@id/homeButton"
         app:layout_constraintTop_toTopOf="parent" />
@@ -66,11 +67,12 @@
     <TextView
         android:id="@+id/legitClicks"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="40dp"
         android:gravity="center"
         android:text="0"
         android:textColor="@color/magenta_shadow"
         android:textSize="30sp"
+        android:paddingTop="4dp"
         app:layout_constraintBottom_toBottomOf="@id/timer"
         app:layout_constraintEnd_toStartOf="@id/restartButton"
         app:layout_constraintStart_toEndOf="@id/llImages"
